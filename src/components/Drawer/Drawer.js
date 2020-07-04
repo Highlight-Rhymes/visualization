@@ -1,5 +1,40 @@
 import React, { useState, useEffect } from 'react'
-import Util from '../../utils/Utils'
+import './Drawer.css'
+
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+/**
+ * Recebe um array de intervalos que não se sobrepõem e estão ordenados pelo idxInicial
+ * Retorna um array com os intervalos faltantes
+ * Ex: recebe [{color: ___, interval: [1, 3]}, { color: ___, interval: [5, 7]}] e size = 10 retorna [{color: ___, interval: [0, 0]}, {color: ___, interval: [1, 3]}, {color: ___, interval: [4, 4]}, {color: ___, interval: [5, 7]}, {color: ___, interval: [8, 9]}]
+ * @param {{color: string, interval: [ number, number ]}[]} colorIntervalArray 
+ * @param {number} size
+ */
+function fillMissingIntervals(colorIntervalArray, size, color = 'black') {
+  console.log("size", size) // debug
+  let newIntervals = [];
+  let curMissing = 0;
+  for (const interval of colorIntervalArray) {
+    const [ start, end ] = interval.interval;
+    if (start > curMissing) {
+      newIntervals.push({color, interval: [ curMissing, start-1 ]})
+    }
+    curMissing = end + 1
+    newIntervals.push( {color: interval.color, interval: [ start, end ]} );
+  }
+  const last = colorIntervalArray[colorIntervalArray.length-1].interval[1]
+  if (size && last < size - 1) {
+    newIntervals.push( {color, interval: [ last + 1, size - 1 ]} )
+  }
+  return newIntervals;
+}
  
 const Drawer = function(props) {
  
@@ -8,24 +43,36 @@ const Drawer = function(props) {
   const [ display, setDisplay ] = useState(null)
 
   useEffect(() => {
-    if (lyrics != null && classes != null) {
-        if (display == null) {
-            let components = []
-    
-            classes.forEach((_class, indexI) => {
-                _class.intervals.forEach((interval, indexJ) => {
-                  let syllable = lyrics.substring(interval[0], interval[1])
-                  components.push(<p key={`${indexI}-${indexJ}`} style={{ color: Util.colors[_class.idClass]}}>{syllable}</p>)
-                })
-            });
-            setDisplay(components)
-        }
+    let components = []
+    if (classes && lyrics) {
+      let tmp = classes.reduce(
+        (acc, _class) => {
+          const randomClassColor = getRandomColor()
+          return acc.concat(_class.intervals.map(interval => (
+            {
+              color: randomClassColor,
+              interval
+            }
+          ))
+        )}, [])
+      tmp = tmp.sort((intervalColorA, intervalColorB) => intervalColorA.interval[0] - intervalColorB.interval[0])
+      let tmpLyrics = lyrics.split('\n').join('#')
+      tmp = fillMissingIntervals(tmp, tmpLyrics.length)
+      tmpLyrics = tmpLyrics.split('#').join('\n')
+      tmp.forEach(({ color, interval }, indexI) => {
+        let syllable = tmpLyrics.substring(interval[0], interval[1]+1)
+        components.push(<p onSelect={e => console.log(e.target)} key={`${indexI}}`} style={{ backgroundColor: color, width: 'fit-content' }}>{syllable}</p>)
+        // troca quebras de linha por line break tag, não funciona
+        if (syllable.match(/.*\n.*/))
+          components.push(<br/>)
+      });
+      setDisplay(components)
     }
   }, [lyrics, classes]);
 
  
   return (
-    <div>
+    <div className="Drawer">
       {display}
     </div>
   )
