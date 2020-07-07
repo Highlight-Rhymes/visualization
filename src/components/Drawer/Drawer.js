@@ -59,14 +59,15 @@ const Drawer = function(props) {
       let tmpLyrics = lyrics;
       tmp = fillMissingIntervals(tmp, tmpLyrics.length)
       tmp.forEach(({ color, interval }, indexI) => {
-        let syllable = tmpLyrics.substring(interval[0], interval[1]+1)
+        const [ start, end ] = interval;
+        let syllable = tmpLyrics.substring(start, end+1)
         components.push(
-          <div className="highlight-container"
+          <p className="highlight-container"
             key={`${indexI}}`} 
             style={{ backgroundColor: color }}>
               {syllable}
               {syllable.includes("\n")}
-          </div>
+          a</p>
         )
       });
       setDisplay(components)
