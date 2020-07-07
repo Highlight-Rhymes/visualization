@@ -76,7 +76,7 @@ function Input(props) {
         intervals: [
             [0, 4],
             [8, 12],
-            [21, 29]
+            [21, 27]
         ]
       },
       {
@@ -91,7 +91,6 @@ function Input(props) {
         intervals: [
             [28, 40],
             [60, 120],
-            [111, 118]
         ]
       }
   ]
@@ -100,7 +99,6 @@ function Input(props) {
   return (
     <div className="App">
         <p>Visualizar minha música</p>
-        <input type="text" name="lyrics" value={lyrics}></input>
         <button onClick={() => props.onSubmit(lyrics, classes)}>Visualizar</button>
     </div>
   );
