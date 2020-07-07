@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './App.css';
 import Input from './components/input/Input';
-import Draw from './components/drawer/Drawer';
+import Drawer from './components/drawer/Drawer';
 
 function App() {
 
@@ -17,7 +17,7 @@ function App() {
           setClasses(classes);
         }}></Input>
 
-        <Draw lyrics={lyrics} classes={classes}></Draw>
+        <Drawer lyrics={lyrics} classes={classes}></Drawer>
       </header>
     </div>
   );

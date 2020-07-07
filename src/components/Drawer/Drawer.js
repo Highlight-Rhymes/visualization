@@ -35,7 +35,7 @@ function fillMissingIntervals(colorIntervalArray, size, color = 'black') {
   }
   return newIntervals;
 }
- 
+
 const Drawer = function(props) {
  
   const { lyrics, classes } = props;
@@ -56,15 +56,18 @@ const Drawer = function(props) {
           ))
         )}, [])
       tmp = tmp.sort((intervalColorA, intervalColorB) => intervalColorA.interval[0] - intervalColorB.interval[0])
-      let tmpLyrics = lyrics.split('\n').join('#')
+      let tmpLyrics = lyrics;
       tmp = fillMissingIntervals(tmp, tmpLyrics.length)
-      tmpLyrics = tmpLyrics.split('#').join('\n')
       tmp.forEach(({ color, interval }, indexI) => {
         let syllable = tmpLyrics.substring(interval[0], interval[1]+1)
-        components.push(<p onSelect={e => console.log(e.target)} key={`${indexI}}`} style={{ backgroundColor: color, width: 'fit-content' }}>{syllable}</p>)
-        // troca quebras de linha por line break tag, não funciona
-        if (syllable.match(/.*\n.*/))
-          components.push(<br/>)
+        components.push(
+          <div className="highlight-container"
+            key={`${indexI}}`} 
+            style={{ backgroundColor: color }}>
+              {syllable}
+              {syllable.includes("\n")}
+          </div>
+        )
       });
       setDisplay(components)
     }
