@@ -67,7 +67,7 @@ const Drawer = function(props) {
             style={{ backgroundColor: color }}>
               {syllable}
               {syllable.includes("\n")}
-          a</p>
+          </p>
         )
       });
       setDisplay(components)
