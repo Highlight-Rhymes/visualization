@@ -17,7 +17,7 @@ function getRandomColor() {
  * @param {{color: string, interval: [ number, number ]}[]} colorIntervalArray 
  * @param {number} size
  */
-function fillMissingIntervals(colorIntervalArray, size, color = 'black') {
+function fillMissingIntervals(colorIntervalArray, size, color = 'white') {
   let newIntervals = [];
   let curMissing = 0;
   for (const interval of colorIntervalArray) {

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import './App.css';
 import Input from './components/input/Input';
 import Drawer from './components/drawer/Drawer';
+import MusicPlayer from './components/wav-player';
 
 function App() {
 
@@ -10,15 +11,18 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        
-        <Input onSubmit={(lyrics, classes) => {
-          setLyrics(lyrics);
-          setClasses(classes);
-        }}></Input>
+      <Input onSubmit={(lyrics, classes) => {
+        setLyrics(lyrics);
+        setClasses(classes);
+      }}></Input>
 
-        <Drawer lyrics={lyrics} classes={classes}></Drawer>
-      </header>
+      <Drawer lyrics={lyrics} classes={classes}></Drawer>
+
+      <div>
+        <h1>Stuff of dataset creation</h1>
+        <MusicPlayer/>
+      </div>
+
     </div>
   );
 }
