@@ -18,7 +18,6 @@ function getRandomColor() {
  * @param {number} size
  */
 function fillMissingIntervals(colorIntervalArray, size, color = 'black') {
-  console.log("size", size) // debug
   let newIntervals = [];
   let curMissing = 0;
   for (const interval of colorIntervalArray) {
@@ -62,12 +61,11 @@ const Drawer = function(props) {
         const [ start, end ] = interval;
         let syllable = tmpLyrics.substring(start, end+1)
         components.push(
-          <p className="highlight-container"
+          <div className="highlight-container"
             key={`${indexI}}`} 
             style={{ backgroundColor: color }}>
               {syllable}
-              {syllable.includes("\n")}
-          </p>
+          </div>
         )
       });
       setDisplay(components)
