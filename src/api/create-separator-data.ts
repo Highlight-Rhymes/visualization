@@ -1,13 +1,18 @@
 import { MusicI, TimeInterval } from "../types";
 import { ResponseI } from './index';
 import MUSICS from './musics-stub';
-import musics from "./musics-stub";
 
+/**
+ * Descreve a música que se quer pegar da API
+ */
 interface MusicFilterI {
   name?: string;
   _id?: string;
 }
 
+/**
+ * Representa os novos valores para os campos de uma música
+ */
 interface UpdateMusicI { 
   name?: string, 
   data?: Uint8Array, 
@@ -51,9 +56,9 @@ export default {
     const music: MusicI = {
       name,
       data,
-      _id: String(musics.length)
+      _id: String(MUSICS.length)
     };
-    musics.push(music)
+    MUSICS.push(music)
     return {
       status: 200,
       data: music,
