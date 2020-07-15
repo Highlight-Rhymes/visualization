@@ -1,3 +1,9 @@
+
+## Para usar com typescript...
+clone o repositório de tipos https://github.com/Highlight-Rhymes/types em src/
+
+_______________________________________
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
