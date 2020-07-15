@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './App.css';
 import Input from './components/input/Input';
 import Drawer from './components/drawer/Drawer';
-import MusicPlayer from './components/wav-player';
+import ManualSeparator from './components/manual-separator';
 
 function App() {
 
@@ -20,7 +20,7 @@ function App() {
 
       <div>
         <h1>Stuff of dataset creation</h1>
-        <MusicPlayer/>
+        <ManualSeparator/>
       </div>
 
     </div>
