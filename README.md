@@ -1,7 +1,10 @@
 
-## Para usar com typescript...
-clone o repositório de tipos https://github.com/Highlight-Rhymes/types em src/
-
+## Clone o repositório de tipos https://github.com/Highlight-Rhymes/types em src/
+```bash
+cd src
+git clone https://github.com/Highlight-Rhymes/types.git
+```
+> Tem um jeito de linkar o repositório e ele funcionar como uma dependência, mas por enquanto tem que clonar.
 _______________________________________
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
