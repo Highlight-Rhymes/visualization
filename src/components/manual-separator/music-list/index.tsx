@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import MusicItem from './music-item';
+import '../styles/MusicList.css'
 
 import { MusicI } from '../../../types';
 
@@ -16,14 +17,13 @@ const MusicList = function({ allowHide = true, ...props }: Props) {
   const [ visible, setVisible ] = useState<boolean>(true);
 
   return (
-    <div>
+    <div className="MusicList">
       { 
         allowHide && 
         <button onClick={() => setVisible(!visible)}>{visible ? "Esconder" : "Mostrar"} lista de músicas</button>
         }
-      { 
-        visible &&
-        <div>
+      {
+        <div className="musics-wrapper" hidden={visible}>
           {
             musics.map(m => <MusicItem music={m} key={m._id}/>)
           }
