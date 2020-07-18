@@ -23,7 +23,7 @@ const ManualSeparator = function(props: Props) {
 
   return (
     <div>
-      <MusicList musics={musics}/>
+      <MusicList musics={musics} allowHide/>
       <IntervalsController/>
       <UploadMusic/>
     </div>
