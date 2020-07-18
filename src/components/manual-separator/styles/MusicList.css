@@ -1,0 +1,14 @@
+.MusicList {
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  z-index: 1000;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.MusicList button {
+  margin-right: auto;
+}
