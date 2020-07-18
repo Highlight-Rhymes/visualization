@@ -7,9 +7,6 @@ import React from 'react'
 
 function Input(props) {
 
-  /**
-    0 -> 32
-   */
   let lyrics = `(Hey) É porque eu sigo na sombra
 Mais um soldado que não tomba
 Toma mais essa bomba
@@ -30,7 +27,7 @@ Então vai se escondendo, eu tô partindo pro próximo passo
           [57, 59],
           [63, 64],
           [78, 80],
-          [95, 97],
+          [95, 97]
         ]
       },
       {
@@ -115,7 +112,6 @@ Então vai se escondendo, eu tô partindo pro próximo passo
         intervals: [
         ]
       },
-      ,
       {
         idClass: 12,
         intervals: [

@@ -13,7 +13,6 @@ function useAudioPlayer(audioRef: React.RefObject<HTMLAudioElement>) {
       return;
     }
     const audio = audioRef.current;
-    console.log({duration, curTime, playing, clickedTime})
     // state setters wrappers
     const setAudioData = () => {
       setDuration(audio.duration);
@@ -30,9 +29,9 @@ function useAudioPlayer(audioRef: React.RefObject<HTMLAudioElement>) {
     // React state listeners: update DOM on React state changes
     playing ? audio.play() : audio.pause();
 
-    if (clickedTime !== curTime && isNumber(clickedTime)) {
+    if (isNumber(clickedTime)) {
       audio.currentTime = clickedTime;
-    } 
+    }
 
     // effect cleanup
     return () => {

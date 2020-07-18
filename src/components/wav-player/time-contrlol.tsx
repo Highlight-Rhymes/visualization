@@ -9,7 +9,7 @@ interface SliderProps {
   curX: number
 }
 
-const Slider = function({}: SliderProps) {
+const Slider = function(props: SliderProps) {
   return (
     <div>
       Current time on audio tag is:

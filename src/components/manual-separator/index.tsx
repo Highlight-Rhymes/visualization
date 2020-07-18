@@ -26,15 +26,11 @@ const ManualSeparator = function(props: Props) {
       <div>
         Músicas Disponívels:
         {
-          musics.map(m => <MusicItem music={m}/>)
+          musics.map(m => <MusicItem music={m} key={m._id}/>)
         }
       </div>
-      <div>
-        <IntervalsController/>
-      </div>
-      <div>
-        <UploadMusic/>
-      </div>
+      <IntervalsController/>
+      <UploadMusic/>
     </div>
   )
 }
