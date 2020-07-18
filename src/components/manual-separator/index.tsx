@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { CreateSeparatorDataAPI } from '../../api'
 import { MusicI } from '../../types'
-import MusicItem from './music-item';
+import MusicList from './music-list';
 import UploadMusic from './upload-music';
 import IntervalsController from './intervals-controller';
 
@@ -23,12 +23,7 @@ const ManualSeparator = function(props: Props) {
 
   return (
     <div>
-      <div>
-        Músicas Disponívels:
-        {
-          musics.map(m => <MusicItem music={m} key={m._id}/>)
-        }
-      </div>
+      <MusicList musics={musics}/>
       <IntervalsController/>
       <UploadMusic/>
     </div>

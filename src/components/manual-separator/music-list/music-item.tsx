@@ -1,7 +1,7 @@
 import React from 'react';
-import AudioPlayer from '../wav-player/index'
-import { MusicI } from '../../types';
-import './styles/MusicItem.css'
+import AudioPlayer from '../../wav-player/index'
+import { MusicI } from '../../../types';
+import '../styles/MusicItem.css'
 
 export interface IntervalProps {
   start: number;
