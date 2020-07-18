@@ -19,7 +19,7 @@ const MusicList = function({ allowHide = true, ...props }: Props) {
     <div>
       { 
         allowHide && 
-        <button onClick={() => setVisible(!visible)}>{visible ? "Esconder" : "Mostrar"}</button>
+        <button onClick={() => setVisible(!visible)}>{visible ? "Esconder" : "Mostrar"} lista de músicas</button>
         }
       { 
         visible &&
