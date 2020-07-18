@@ -2,11 +2,26 @@ import React from 'react';
 import AudioPlayer from '../wav-player/index'
 import { MusicI } from '../../types';
 
-export interface Props {
+export interface IntervalProps {
+  start: number;
+  end: number;
+}
+
+const Interval = function(props: IntervalProps) {
+  const { start, end } = props;
+  return (
+    <div>
+      from: {start}
+      to: {end}
+    </div>
+  )
+}
+
+export interface MusicItemProps {
   music: MusicI
 }
 
-const MusicItem = function(props: Props) {
+const MusicItem = function(props: MusicItemProps) {
 
   const { music } = props;
 
@@ -14,27 +29,23 @@ const MusicItem = function(props: Props) {
   const hasData = music.data !== undefined;
 
   return (
-    <div key={music._id}>
+    <div>
       <p>Nome {music.name}</p>
-      <p>_id {music._id}</p>
-      { hasIntervals && 
-      <div>
-        Intervals:
-        {
-          music.intervals?.map(([ start, end ]) => (
-            <div>
-              from: {start}
-              to: {end}
-            </div>
-          ))
-        }
-      </div>
+      { hasIntervals ? 
+        <div>
+          Intervals:
+          {
+            music.intervals?.map(([ start, end ]) => (
+              <Interval start={start} end={end}/>
+            ))
+          }
+        </div> :
+        <p>Esse áudio ainda não foi dividido em pedaços</p>
       }
       {
-        hasData &&
-        <p>Has music .wav</p>
+        (hasData || true) && // finge que todas as músicas tem .wav por enquanto
+        <AudioPlayer src="./eu-nao-te-amo-don.wav"/>
       }
-      <AudioPlayer src="./eu-nao-te-amo-don.wav"/>
     </div>
   )
 }
