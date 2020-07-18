@@ -1,4 +1,5 @@
 import React from 'react';
+import AudioPlayer from '../wav-player/index'
 import { MusicI } from '../../types';
 
 export interface Props {
@@ -33,6 +34,7 @@ const MusicItem = function(props: Props) {
         hasData &&
         <p>Has music .wav</p>
       }
+      <AudioPlayer src="./eu-nao-te-amo-don.wav"/>
     </div>
   )
 }

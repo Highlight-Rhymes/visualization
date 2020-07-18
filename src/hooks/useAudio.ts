@@ -1,17 +1,19 @@
 import { useState, useEffect } from "react";
+import { isNumber } from "util";
 
 function useAudioPlayer(audioRef: React.RefObject<HTMLAudioElement>) {
   const [duration, setDuration] = useState<number>(0);
   const [curTime, setCurTime] = useState<number>(0);
   const [playing, setPlaying] = useState<boolean>(false);
-  const [clickedTime, setClickedTime] = useState<number>(-1);
+  const [clickedTime, setClickedTime] = useState<number | null>(null);
 
   useEffect(() => {
+    console.log("Audio data of ", audioRef)
     if (!audioRef?.current) {
       return;
     }
     const audio = audioRef.current;
-
+    console.log({duration, curTime, playing, clickedTime})
     // state setters wrappers
     const setAudioData = () => {
       setDuration(audio.duration);
@@ -28,9 +30,8 @@ function useAudioPlayer(audioRef: React.RefObject<HTMLAudioElement>) {
     // React state listeners: update DOM on React state changes
     playing ? audio.play() : audio.pause();
 
-    if (clickedTime && clickedTime !== curTime) {
+    if (clickedTime !== curTime && isNumber(clickedTime)) {
       audio.currentTime = clickedTime;
-      setClickedTime(-1);
     } 
 
     // effect cleanup
@@ -38,7 +39,7 @@ function useAudioPlayer(audioRef: React.RefObject<HTMLAudioElement>) {
       audio.removeEventListener("loadeddata", setAudioData);
       audio.removeEventListener("timeupdate", setAudioTime);
     }
-  }, [ audioRef ]);
+  }, [ audioRef, playing, clickedTime ]);
 
   return {
     curTime,

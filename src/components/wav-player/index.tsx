@@ -3,18 +3,18 @@ import useAudio from '../../hooks/useAudio'
 import TimeControl from './time-contrlol';
 
 interface Props {
-
+  src: string
 }
 
 const MusicPlayer = function(props: Props) {
-
+  const { src } = props;
   const audioRef = useRef(null);
   const { curTime, duration, playing, setClickedTime, setPlaying } = useAudio(audioRef);
 
   return (
     <div>
       <audio ref={audioRef}>
-        <source src="./song.mp3" />
+        <source src={src} />
         Your browser does not support the <code>audio</code> element.
       </audio>
       {/* <label>Playback rate: </label>
