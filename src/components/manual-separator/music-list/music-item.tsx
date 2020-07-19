@@ -19,18 +19,22 @@ const Interval = function(props: IntervalProps) {
 }
 
 export interface MusicItemProps {
-  music: MusicI
+  music: MusicI;
+  onClick?: (musicId: string) => void
 }
 
 const MusicItem = function(props: MusicItemProps) {
 
-  const { music } = props;
+  const { music, onClick } = props;
 
   const hasIntervals = music.intervals !== undefined;
   const hasData = music.data !== undefined;
 
   return (
-    <div className="MusicItem">
+    <div className="MusicItem"
+      onClick={() => {
+        onClick && onClick(music._id)
+      }}>
       <p>Nome {music.name}</p>
       { hasIntervals ? 
         <div>

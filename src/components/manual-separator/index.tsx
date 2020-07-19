@@ -12,6 +12,9 @@ export interface Props {
 const ManualSeparator = function(props: Props) {
 
   const [ musics, setMusics ] = useState<MusicI[]>([])
+  const [ musicInWorkspaceId, setMusicInWorkspaceId ] = useState<string | null>(null);
+
+  const musicInWorkspace: MusicI | undefined = musics.find(m => m._id === musicInWorkspaceId)
 
   useEffect(() => {
     CreateSeparatorDataAPI.getMusics()
@@ -23,8 +26,13 @@ const ManualSeparator = function(props: Props) {
 
   return (
     <div>
-      <MusicList musics={musics} allowHide/>
-      <IntervalsController/>
+      <MusicList musics={musics}
+        onClick={musicId => setMusicInWorkspaceId(musicId)}
+        allowHide/>
+      {
+        musicInWorkspace &&
+        <IntervalsController music={musicInWorkspace}/>
+      }
       <UploadMusic/>
     </div>
   )

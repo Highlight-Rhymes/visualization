@@ -10,10 +10,11 @@ interface Props {
    * True if should have a button to hide or show list
    */
   allowHide?: boolean;
+  onClick?: (musicId: string) => void
 }
 const MusicList = function({ allowHide = true, ...props }: Props) {
 
-  const { musics } = props;
+  const { musics, onClick } = props;
   const [ visible, setVisible ] = useState<boolean>(true);
 
   return (
@@ -25,7 +26,7 @@ const MusicList = function({ allowHide = true, ...props }: Props) {
       {
         <div className="musics-wrapper" hidden={visible}>
           {
-            musics.map(m => <MusicItem music={m} key={m._id}/>)
+            musics.map(m => <MusicItem music={m} key={m._id} onClick={onClick}/>)
           }
         </div>
       }

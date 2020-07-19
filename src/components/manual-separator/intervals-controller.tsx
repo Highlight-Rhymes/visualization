@@ -1,9 +1,19 @@
 import React from 'react';
+import CustomWavDisplay from '../waveform';
+import { MusicI } from '../../types';
 
-const IntervalsController = function(props: {}) {
+interface IntervalsControllerProps {
+  music: MusicI;
+} 
+
+const IntervalsController = function(props: IntervalsControllerProps) {
+  const { music } = props;
+
   return (
     <div>
-      Add / edit / remove intervals in a registered music
+      <label>Nome da faixa:</label>
+      <p>{music.name}</p>
+      <CustomWavDisplay src="./eu-nao-te-amo-don.wav"/>
     </div>
   )
 }
