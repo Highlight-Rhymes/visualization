@@ -42,8 +42,6 @@ const Waveform = function({ src, options, onInit = defaultOnInit , ...props }: P
     }
 
     const audioElement = ReactDOM.findDOMNode(audioRef.current);
-    // const zoomviewElement = ReactDOM.findDOMNode(zoomviewContainerRef.current);
-    // // const overviewElement = ReactDOM.findDOMNode(overviewContainerRef.current);
 
     // can only use subset of types possibly returned by ReactDOM.findDOMNode
     if (!audioElement || audioElement instanceof Text) {
@@ -51,18 +49,6 @@ const Waveform = function({ src, options, onInit = defaultOnInit , ...props }: P
       return;
     }
 
-    // if (!zoomviewElement || zoomviewElement instanceof Text) {
-    //   console.error("containers.zoomview not valid Element")
-    //   return;
-    // }
-
-    // if (!overviewElement || overviewElement instanceof Text) {
-    //   console.error("containers.overview not valid Element")
-    //   return;
-    // }
-
-    console.log("Used elements?")
-    
     const defaultOptions: PeaksOptions = {
       containers: {
         zoomview: zoomviewContainerRef.current,
@@ -73,13 +59,11 @@ const Waveform = function({ src, options, onInit = defaultOnInit , ...props }: P
         /**
          * A Web Audio AudioContext instance which can be used
          * to render the waveform if dataUri is not provided
-         * 
          */
         audioContext: new AudioContext(),
         /**
          * If true, the waveform will show all available channels.
          * If false, the audio is shown as a single channel waveform.
-         * 
          */
         multiChannel: false
       },

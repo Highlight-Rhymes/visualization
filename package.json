@@ -12,7 +12,6 @@
     "@types/react-dom": "^16.9.8",
     "peaks.js": "^0.21.0",
     "react": "^16.13.1",
-    "react-audio-waveform": "https://github.com/Highlight-Rhymes/react-audio-waveform.git",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
     "typescript": "^3.9.6"
