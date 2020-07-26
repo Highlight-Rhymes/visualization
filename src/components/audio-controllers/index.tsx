@@ -8,6 +8,9 @@ interface Props {
   onPause: () => void;
   onStartClip: () => void;
   onEndClip: () => void;
+  playing: boolean;
+  clipping: boolean;
+  onResetClip: () => void;
 }
 
 const Icon = ({ src, size, alt, onClick }: { src: string, size: number, alt: string, onClick: (event: React.MouseEvent<HTMLImageElement>) => void }) => 
@@ -23,25 +26,25 @@ const Icon = ({ src, size, alt, onClick }: { src: string, size: number, alt: str
 
 
 const AudioControllers = function(props: Props) {
-  const { onPlay, onPause, onStartClip, onEndClip } = props;
-  const [ clipping, setClipping ] = useState<boolean>(false);
-
+  const { onPlay, onPause, onStartClip, onEndClip, playing, clipping, onResetClip } = props;
   
   const handleClick = function() {
     if (clipping) {
       onEndClip();
-      setClipping(false);
     } else {
       onStartClip();
-      setClipping(true);
     }
   }
 
   return (
     <div className="AudioController">
-      <Icon src={playIcon} alt="Play" onClick={onPlay} size={30}/>
-      <Icon src={pauseIcon} alt="Play" onClick={onPause} size={30}/>
+      {
+        playing ?
+        <Icon src={pauseIcon} alt="Pause" onClick={onPause} size={30}/> :
+          <Icon src={playIcon} alt="Play" onClick={onPlay} size={30}/>
+      }
       <button onClick={handleClick}>{ clipping ? "Clip" : "Start Clipping"}</button>
+      { clipping && <button onClick={onResetClip}>Cancelar</button> }
     </div>
   )
 }

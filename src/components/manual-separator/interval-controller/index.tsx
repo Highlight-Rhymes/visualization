@@ -6,6 +6,8 @@ import CustomWavDisplay from '../../waveform';
 import { MusicI, TimeInterval } from '../../../types';
 import Peaks, { PeaksOptions, PeaksInitCallback, OptionalOptions } from 'peaks.js';
 import Interval from './interval';
+
+const UNSET_TIME: number = -1;
 interface IntervalsControllerProps {
   music: MusicI;
 } 
@@ -66,19 +68,27 @@ const IntervalsController = function(props: IntervalsControllerProps) {
     }
   }, [ music ])
 
+  const [ playing, setPlaying ] = useState<boolean>(false);
+
   const getCurrentTime = () => peaks?.player.getCurrentTime();
-  const play = () => peaks?.player.play();
-  const pause = () => peaks?.player.pause();
+  const play = () => {
+    setPlaying(true);
+    peaks?.player.play();
+  }
+  const pause = () => {
+    setPlaying(false)
+    peaks?.player.pause();
+  }
 
   /**
    * @type {[ number, Function ]} start time in ms of new segment state and state setter
    */
-  const [ newSegmentStart, setNewSegmentStart ] = useState<number>(-1)
+  const [ newSegmentStart, setNewSegmentStart ] = useState<number>(UNSET_TIME)
   
   /**
    * @type {[ number, Function ]} end time in ms of new segment state and state setter
    */
-  const [ newSegmentEnd, setNewSegmentEnd ] = useState<number>(-1);
+  const [ newSegmentEnd, setNewSegmentEnd ] = useState<number>(UNSET_TIME);
 
   const playSegment = (segmentId: string) => {
     const segs = getSegments();
@@ -119,8 +129,11 @@ const IntervalsController = function(props: IntervalsControllerProps) {
 
   const getSegments = () =>  peaks?.segments.getSegments()
 
+  const [ clipping, setClipping ] = useState<boolean>(false)
+
   const handleStartClip = () => {
     const time = getCurrentTime();
+    setClipping(true);
     if (time) {
       setNewSegmentStart(time)
     }
@@ -128,10 +141,17 @@ const IntervalsController = function(props: IntervalsControllerProps) {
 
   const handleEndClip = () => {
     const time = getCurrentTime();
+    setClipping(false)
     if (time) {
       setNewSegmentEnd(time)
       addSegment(newSegmentStart, time)
     }
+  }
+
+  const handleResetClip = () => {
+    setClipping(false);
+    setNewSegmentEnd(UNSET_TIME)
+    setNewSegmentStart(UNSET_TIME)
   }
 
   return (
@@ -162,6 +182,9 @@ const IntervalsController = function(props: IntervalsControllerProps) {
               onPause={pause}
               onStartClip={handleStartClip}
               onEndClip={handleEndClip}
+              playing={playing}
+              clipping={clipping}
+              onResetClip={handleResetClip}
             />
         }
     </div>
