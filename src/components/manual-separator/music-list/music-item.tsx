@@ -1,5 +1,4 @@
 import React from 'react';
-import AudioPlayer from '../../wav-player/index'
 import { MusicI } from '../../../types';
 import '../styles/MusicItem.css'
 

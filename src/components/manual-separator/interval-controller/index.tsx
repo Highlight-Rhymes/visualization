@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
-import { PeaksInstance, Segment, SegmentAddOptions } from 'peaks.js';
+import { PeaksInstance, SegmentAddOptions } from 'peaks.js';
 import AudioController from '../../audio-controllers';
-import CustomWavDisplay from '../../waveform';
 import { MusicI, TimeInterval } from '../../../types';
-import Peaks, { PeaksOptions, PeaksInitCallback, OptionalOptions } from 'peaks.js';
+import Peaks, { PeaksOptions } from 'peaks.js';
 import Interval from './interval';
 
 const UNSET_TIME: number = -1;
@@ -85,10 +84,6 @@ const IntervalsController = function(props: IntervalsControllerProps) {
    */
   const [ newSegmentStart, setNewSegmentStart ] = useState<number>(UNSET_TIME)
   
-  /**
-   * @type {[ number, Function ]} end time in ms of new segment state and state setter
-   */
-  const [ newSegmentEnd, setNewSegmentEnd ] = useState<number>(UNSET_TIME);
 
   const playSegment = (segmentId: string) => {
     const segs = getSegments();
@@ -143,16 +138,23 @@ const IntervalsController = function(props: IntervalsControllerProps) {
     const time = getCurrentTime();
     setClipping(false)
     if (typeof time === "number") {
-      setNewSegmentEnd(time)
       addSegment(newSegmentStart, time)
     }
   }
 
   const handleResetClip = () => {
     setClipping(false);
-    setNewSegmentEnd(UNSET_TIME)
     setNewSegmentStart(UNSET_TIME)
   }
+
+  const [ playbackRate, setPlaybackRate ] = useState<number>(1);
+
+  useEffect(() => {
+    if(audioRef.current) {
+      audioRef.current.playbackRate = playbackRate
+    }
+  }, [ playbackRate ])
+
 
   return (
     <div>
@@ -185,6 +187,8 @@ const IntervalsController = function(props: IntervalsControllerProps) {
               playing={playing}
               clipping={clipping}
               onResetClip={handleResetClip}
+              playbackRate={playbackRate}
+              onPlaybackRateChange={setPlaybackRate}
             />
         }
     </div>
