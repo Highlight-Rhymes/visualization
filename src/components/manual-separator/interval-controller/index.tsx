@@ -80,7 +80,19 @@ const IntervalsController = function(props: IntervalsControllerProps) {
    */
   const [ newSegmentEnd, setNewSegmentEnd ] = useState<number>(-1);
 
-  const playSegment = (segment: Segment) => peaks?.player.playSegment(segment);
+  const playSegment = (segmentId: string) => {
+    const segs = getSegments();
+    if (!segs) {
+      console.warn("No segments in peaks.segments")
+      return null;
+    }
+    const seg = segs.find(s => s.id === segmentId)
+    if (!seg) {
+      console.error("No segment w/ id " + segmentId);
+      return;
+    }
+    peaks?.player.playSegment(seg);
+  }
 
   const addSegment = (start: number, end: number) => {
     // @todo make HTTP request to backend
@@ -138,7 +150,7 @@ const IntervalsController = function(props: IntervalsControllerProps) {
         {
           getSegments()?.map((s, i) => s && <Interval segment={s}
                                               index={i}
-                                              onClick={id => console.log(`Clicked on segment with id ${id}`)}
+                                              onClick={playSegment}
                                               key={i}
                                               />)
         }
