@@ -134,7 +134,7 @@ const IntervalsController = function(props: IntervalsControllerProps) {
   const handleStartClip = () => {
     const time = getCurrentTime();
     setClipping(true);
-    if (time) {
+    if (typeof time === "number") {
       setNewSegmentStart(time)
     }
   }
@@ -142,7 +142,7 @@ const IntervalsController = function(props: IntervalsControllerProps) {
   const handleEndClip = () => {
     const time = getCurrentTime();
     setClipping(false)
-    if (time) {
+    if (typeof time === "number") {
       setNewSegmentEnd(time)
       addSegment(newSegmentStart, time)
     }
