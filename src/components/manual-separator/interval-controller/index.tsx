@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import { PeaksInstance, Segment, SegmentAddOptions } from 'peaks.js';
-import AudioController from '../audio-controllers';
-import CustomWavDisplay from '../waveform';
-import { MusicI, TimeInterval } from '../../types';
+import AudioController from '../../audio-controllers';
+import CustomWavDisplay from '../../waveform';
+import { MusicI, TimeInterval } from '../../../types';
 import Peaks, { PeaksOptions, PeaksInitCallback, OptionalOptions } from 'peaks.js';
+import Interval from './interval';
 interface IntervalsControllerProps {
   music: MusicI;
 } 
@@ -104,6 +105,8 @@ const IntervalsController = function(props: IntervalsControllerProps) {
     }
   }
 
+  const getSegments = () =>  peaks?.segments.getSegments()
+
   const handleStartClip = () => {
     const time = getCurrentTime();
     if (time) {
@@ -132,7 +135,13 @@ const IntervalsController = function(props: IntervalsControllerProps) {
         <div id="overview-container" ref={overviewContainerRef}></div>
       </div>
       <div>
-        
+        {
+          getSegments()?.map((s, i) => s && <Interval segment={s}
+                                              index={i}
+                                              onClick={id => console.log(`Clicked on segment with id ${id}`)}
+                                              key={i}
+                                              />)
+        }
       </div>
         {
           peaksLoading ?

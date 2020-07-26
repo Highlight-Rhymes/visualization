@@ -3,7 +3,7 @@ import { CreateSeparatorDataAPI } from '../../api'
 import { MusicI } from '../../types'
 import MusicList from './music-list';
 import UploadMusic from './upload-music';
-import IntervalsController from './intervals-controller';
+import IntervalsController from './interval-controller';
 
 export interface Props {
 
