@@ -40,17 +40,17 @@ const MusicItem = function(props: MusicItemProps) {
         <div>
           Intervals:
           {
-            music.intervals?.map(([ start, end ]) => (
+            music.intervals?.map(({ start, end }) => (
               <Interval start={start} end={end}/>
             ))
           }
         </div> :
         <p>Esse áudio ainda não foi dividido em pedaços</p>
       }
-      {
+      {/*
         (hasData || true) && // finge que todas as músicas tem .wav por enquanto
         <AudioPlayer src="./eu-nao-te-amo-don.wav"/>
-      }
+      */}
     </div>
   )
 }

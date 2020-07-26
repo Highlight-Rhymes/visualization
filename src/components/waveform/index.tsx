@@ -8,7 +8,6 @@ const defaultOnInit: PeaksInitCallback = (error, peaks) => {
   }
   else {
     console.log(peaks);
-    peaks?.player.play()
   }
 }
 
@@ -34,7 +33,6 @@ const Waveform = function({ src, options, onInit = defaultOnInit , ...props }: P
   const overviewContainerRef = useRef<HTMLDivElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  
   useEffect(() => {
 
     if (!audioRef || !zoomviewContainerRef || !overviewContainerRef) {
@@ -74,6 +72,9 @@ const Waveform = function({ src, options, onInit = defaultOnInit , ...props }: P
       ...(options || {})
     }
     Peaks.init(mergedOptions, onInit);
+    return () => {
+      
+    }
   }, [ options, onInit ])
 
   return (

@@ -1,0 +1,8 @@
+.AudioController {
+  display: flex;
+  width: fit-content;
+}
+
+.icon {
+  margin: 10px 20px;
+}
