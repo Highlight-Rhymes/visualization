@@ -20,7 +20,9 @@ const ManualSeparator = function(props: Props) {
     CreateSeparatorDataAPI.getMusics()
       .then(res => res.data)
       .then(musics => {
-        setMusics(musics);
+        if (musics) {
+          setMusics(musics);
+        }
       })
   }, [])
 

@@ -8,7 +8,7 @@ interface ResponseI<T> {
   /**
    * Os recursos pedidos à API
    */
-  data: T;
+  data?: T;
   message?: string;
 }
 
