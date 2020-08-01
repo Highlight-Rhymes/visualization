@@ -24,7 +24,7 @@ const UploadMusic = function(props: {}) {
             console.log('Música inserida!')
           } else {
             console.log('Música não inserida');
-            console.log('status ', status, '\nMessage: 'res.message)
+            console.log('status ', res.status, '\nMessage: ',res.message)
           }
         })
         .catch(err => {
